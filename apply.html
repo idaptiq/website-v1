@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Apply — idaptiq</title>
+  <meta name="description" content="Apply to join idaptiq — biostatistics, statistical programming, and engineering roles.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body>
+
+  <div class="preview-banner">
+    Preview build — not yet live on idaptiq.com
+  </div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="index.html">
+        <img src="logo.png" alt="idaptiq">
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="careers.html" class="is-active">Careers</a>
+        <a href="contact.html" class="btn btn-ghost btn-sm nav-cta">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <span class="eyebrow">Apply</span>
+      <h1>Join <span class="accent">idaptiq</span>.</h1>
+      <p class="hero-sub">
+        Tell us a bit about yourself and the role you're interested in. We read every
+        application and will follow up directly.
+      </p>
+    </div>
+  </header>
+
+  <section style="padding-top: 0;">
+    <div class="container">
+      <form id="apply-form" class="form-card" novalidate>
+        <div class="form-row">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" required autocomplete="name">
+        </div>
+
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required autocomplete="email">
+        </div>
+
+        <div class="form-row">
+          <label for="phone">Phone <span class="hint">(optional)</span></label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel">
+        </div>
+
+        <div class="form-row">
+          <label for="linkedin">LinkedIn URL <span class="hint">(optional)</span></label>
+          <input id="linkedin" name="linkedin" type="url" placeholder="https://www.linkedin.com/in/...">
+        </div>
+
+        <div class="form-row">
+          <label for="role">Role you're applying for</label>
+          <input id="role" name="role" type="text" required placeholder="e.g. Head of Biostatistics Automation, or General interest">
+        </div>
+
+        <div class="form-row">
+          <label for="experience">Relevant experience &amp; why you're interested</label>
+          <textarea id="experience" name="experience" rows="6" required placeholder="A few sentences on your background and what draws you to idaptiq."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Submit application</button>
+          <span class="form-note">Please attach your resume in your email client before sending.</span>
+        </div>
+
+        <div id="form-status" class="form-status" role="status"></div>
+      </form>
+
+      <p class="form-note" style="margin-top: 24px;">
+        Prefer direct email? Send your application to
+        <a href="mailto:info@idaptiq.com" style="color: var(--orange);">info@idaptiq.com</a>
+        with your resume attached.
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>&copy; <span id="year"></span> idaptiq</div>
+      <div>
+        <a href="index.html">Home</a> &nbsp;·&nbsp;
+        <a href="about.html">About</a> &nbsp;·&nbsp;
+        <a href="careers.html">Careers</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    (function () {
+      var RECIPIENTS = "nfox@idaptiq.com,sferber@idaptiq.com,eroza@idaptiq.com";
+
+      var params = new URLSearchParams(window.location.search);
+      var prefilledRole = params.get("role");
+
+      var form = document.getElementById("apply-form");
+      var status = document.getElementById("form-status");
+      var roleField = document.getElementById("role");
+
+      if (prefilledRole) {
+        roleField.value = prefilledRole;
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var name = form.name.value.trim();
+        var email = form.email.value.trim();
+        var phone = form.phone.value.trim();
+        var linkedin = form.linkedin.value.trim();
+        var role = form.role.value.trim();
+        var experience = form.experience.value.trim();
+
+        if (!name || !email || !role || !experience) {
+          status.textContent = "Please fill in your name, email, the role, and your experience.";
+          status.classList.add("is-visible");
+          return;
+        }
+
+        var subject = "Application from " + name + " — " + role;
+
+        var bodyLines = [
+          "Name: " + name,
+          "Email: " + email,
+          "Phone: " + (phone || "(not provided)"),
+          "LinkedIn: " + (linkedin || "(not provided)"),
+          "Role: " + role,
+          "",
+          "Relevant experience & interest:",
+          experience,
+          "",
+          "---",
+          "Resume: please see attachment."
+        ];
+
+        var href =
+          "mailto:" + RECIPIENTS +
+          "?subject=" + encodeURIComponent(subject) +
+          "&body=" + encodeURIComponent(bodyLines.join("\n"));
+
+        status.textContent = "Opening your email client… please attach your resume before sending. If nothing happens, email us directly at info@idaptiq.com.";
+        status.classList.add("is-visible");
+
+        window.location.href = href;
+      });
+    })();
+  </script>
+
+</body>
+</html>
