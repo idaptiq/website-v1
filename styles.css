@@ -202,6 +202,16 @@ img { max-width: 100%; display: block; }
   flex-wrap: wrap;
 }
 
+.hero-tag {
+  margin: 36px 0 0;
+  padding-left: 14px;
+  border-left: 3px solid var(--orange);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+}
+
 /* ---------- Sections ---------- */
 
 section {
@@ -274,6 +284,73 @@ section {
   color: #1a1138;
   font-weight: 700;
   font-size: 18px;
+}
+
+/* ---------- Module flow ---------- */
+
+.module-flow {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.module {
+  flex: 1 1 180px;
+  min-width: 180px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--orange);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.module:hover {
+  background: var(--bg-elevated-hover);
+  transform: translateY(-2px);
+}
+
+.module-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--gradient-warm);
+  color: #1a1138;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.module h3 {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+.module p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+.module-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-subtle);
+  font-size: 20px;
+  font-weight: 300;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 820px) {
+  .module-arrow { display: none; }
 }
 
 /* ---------- Two-column prose ---------- */
