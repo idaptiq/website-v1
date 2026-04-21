@@ -463,6 +463,90 @@ section {
 .footer a { color: var(--text-muted); }
 .footer a:hover { color: var(--text); }
 
+/* ---------- Contact form ---------- */
+
+.form-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px;
+  max-width: 640px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.form-row label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+
+.form-row .hint {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-subtle);
+  margin-left: 6px;
+}
+
+.form-row input,
+.form-row textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.form-row input:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: var(--orange);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.form-row textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.form-note {
+  font-size: 13px;
+  color: var(--text-subtle);
+  margin-top: 18px;
+}
+
+.form-status {
+  display: none;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  background: rgba(246, 139, 40, 0.12);
+  border: 1px solid rgba(246, 139, 40, 0.35);
+  color: var(--text);
+}
+
+.form-status.is-visible { display: block; }
+
 /* ---------- Preview banner (remove on launch) ---------- */
 
 .preview-banner {

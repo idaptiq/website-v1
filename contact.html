@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Contact — Idaptiq</title>
+  <meta name="description" content="Request a meeting with the Idaptiq team.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body>
+
+  <div class="preview-banner">
+    Preview build — not yet live on idaptiq.com
+  </div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="index.html">
+        <img src="logo.png" alt="Idaptiq">
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html" class="btn btn-ghost btn-sm nav-cta is-active">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <span class="eyebrow">Contact</span>
+      <h1>Request a <span class="accent">meeting</span>.</h1>
+      <p class="hero-sub">
+        Tell us a bit about yourself and what you'd like to discuss. We'll follow up to
+        set a time.
+      </p>
+    </div>
+  </header>
+
+  <section style="padding-top: 0;">
+    <div class="container">
+      <form id="contact-form" class="form-card" novalidate>
+        <div class="form-row">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required autocomplete="name">
+        </div>
+
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required autocomplete="email">
+        </div>
+
+        <div class="form-row">
+          <label for="company">Company <span class="hint">(optional)</span></label>
+          <input id="company" name="company" type="text" autocomplete="organization">
+        </div>
+
+        <div class="form-row">
+          <label for="message">What would you like to discuss?</label>
+          <textarea id="message" name="message" rows="5" required placeholder="A few sentences about your trial, your team, or what you're hoping to see."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Request a meeting</button>
+          <span class="form-note">Opens your email client with the message pre-filled.</span>
+        </div>
+
+        <div id="form-status" class="form-status" role="status"></div>
+      </form>
+
+      <p class="form-note" style="margin-top: 24px;">
+        Prefer direct email? Reach us at
+        <a href="mailto:info@idaptiq.com" style="color: var(--orange);">info@idaptiq.com</a>.
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>&copy; <span id="year"></span> Idaptiq</div>
+      <div>
+        <a href="index.html">Home</a> &nbsp;·&nbsp;
+        <a href="about.html">About</a> &nbsp;·&nbsp;
+        <a href="careers.html">Careers</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    (function () {
+      var RECIPIENTS = "nfox@idaptiq.com,sferber@idaptiq.com,eroza@idaptiq.com";
+
+      var params = new URLSearchParams(window.location.search);
+      var role = params.get("role");
+
+      var form = document.getElementById("contact-form");
+      var status = document.getElementById("form-status");
+      var messageField = document.getElementById("message");
+
+      if (role && !messageField.value) {
+        messageField.placeholder = "Interested in the " + role + " role — a bit about my background...";
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var name = form.name.value.trim();
+        var email = form.email.value.trim();
+        var company = form.company.value.trim();
+        var message = form.message.value.trim();
+
+        if (!name || !email || !message) {
+          status.textContent = "Please fill in your name, email, and a short message.";
+          status.classList.add("is-visible");
+          return;
+        }
+
+        var subjectParts = ["Meeting request from " + name];
+        if (role) subjectParts.push("(" + role + ")");
+        var subject = subjectParts.join(" ");
+
+        var bodyLines = [
+          "Name: " + name,
+          "Email: " + email,
+          "Company: " + (company || "(not provided)")
+        ];
+        if (role) bodyLines.push("Role of interest: " + role);
+        bodyLines.push("");
+        bodyLines.push(message);
+
+        var href =
+          "mailto:" + RECIPIENTS +
+          "?subject=" + encodeURIComponent(subject) +
+          "&body=" + encodeURIComponent(bodyLines.join("\n"));
+
+        status.textContent = "Opening your email client… if nothing happens, email us directly at info@idaptiq.com.";
+        status.classList.add("is-visible");
+
+        window.location.href = href;
+      });
+    })();
+  </script>
+
+</body>
+</html>
