@@ -83,16 +83,25 @@ img { max-width: 100%; display: block; }
 }
 
 .nav-brand {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-weight: 700;
-  letter-spacing: 0.2px;
+  padding: 6px 12px;
+  background: #f5f1ea;
+  border-radius: 10px;
+  line-height: 0;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.nav-brand:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
 .nav-brand img {
-  height: 28px;
+  height: 26px;
   width: auto;
+  display: block;
 }
 
 .nav-links {
